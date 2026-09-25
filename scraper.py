@@ -57,7 +57,6 @@ def build_index():
     <div id="particlesContainer"></div>
 
     <div class="app">
-        <!-- Header -->
         <div class="header">
             <div class="header-left">
                 <div class="logo">📱</div>
@@ -73,7 +72,6 @@ def build_index():
             </div>
         </div>
 
-        <!-- 3D Visualizer -->
         <div class="visualizer-3d" id="visualizer3D">
             <canvas id="vizCanvas"></canvas>
             <div class="viz-overlay">
@@ -88,7 +86,6 @@ def build_index():
             </div>
         </div>
 
-        <!-- Message Body Input -->
         <div class="message-box">
             <textarea id="messageBody" placeholder="اكتب نص الرسالة هنا..." rows="3"></textarea>
             <div class="msg-meta">
@@ -97,7 +94,6 @@ def build_index():
             </div>
         </div>
 
-        <!-- Timer Control -->
         <div class="timer-box">
             <label>⏱ الفاصل الزمني بين الرسائل</label>
             <input type="range" class="gold-slider" id="intervalSlider" min="5" max="300" value="30" oninput="updateInterval()">
@@ -107,7 +103,6 @@ def build_index():
             </div>
         </div>
 
-        <!-- Controls -->
         <div class="controls">
             <button class="ctrl-btn" onclick="loadContacts()" title="تحميل الملف"><i class="fas fa-file-import"></i></button>
             <button class="ctrl-btn" onclick="resetQueue()" title="إعادة تعيين"><i class="fas fa-undo"></i></button>
@@ -116,7 +111,6 @@ def build_index():
             <button class="ctrl-btn" onclick="exportData()" title="تصدير"><i class="fas fa-download"></i></button>
         </div>
 
-        <!-- Filters Panel -->
         <div class="filter-panel" id="filterPanel" style="display:none">
             <div class="filter-header">
                 <h3>🔍 Filters</h3>
@@ -135,7 +129,6 @@ def build_index():
             </div>
         </div>
 
-        <!-- Settings Panel -->
         <div class="settings-panel" id="settingsPanel" style="display:none">
             <div class="filter-header">
                 <h3>⚙ الإعدادات</h3>
@@ -158,7 +151,6 @@ def build_index():
             </div>
         </div>
 
-        <!-- History Panel -->
         <div class="history-panel" id="historyPanel" style="display:none">
             <div class="history-header">
                 <h3>📜 سجل الإرسال</h3>
@@ -170,7 +162,6 @@ def build_index():
             </div>
         </div>
 
-        <!-- Contacts List -->
         <div class="playlist-section">
             <div class="playlist-header">
                 <h3>👥 جهات الاتصال</h3>
@@ -206,16 +197,13 @@ def build_style():
     return """*{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#050510;--card:rgba(10,10,30,0.85);--card2:rgba(15,15,40,0.7);--text:#e8e0f0;--text2:#9088a8;--text3:#504868;--accent:#00ffcc;--accent2:#ff44aa;--accent3:#ffaa00;--accent4:#6366f1;--glass:rgba(0,255,204,0.06);--border:rgba(0,255,204,0.12);--radius:24px;--radius-sm:16px;--radius-xs:12px}
 body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-tap-highlight-color:transparent;direction:rtl;user-select:none}
-
 .bg-void{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse at 30% 20%,rgba(0,255,204,0.04) 0%,transparent 60%),radial-gradient(ellipse at 70% 80%,rgba(255,68,170,0.03) 0%,transparent 60%),var(--bg)}
 .bg-ring{position:fixed;border-radius:50%;border:1px solid rgba(0,255,204,0.06);z-index:0;pointer-events:none;animation:ringRotate 30s linear infinite}
 .bg-ring-1{width:600px;height:600px;top:-200px;left:-100px;animation-duration:25s}
 .bg-ring-2{width:500px;height:500px;bottom:-150px;right:-80px;animation-duration:35s;animation-direction:reverse}
 .bg-ring-3{width:400px;height:400px;top:30%;left:40%;animation-duration:40s}
 @keyframes ringRotate{to{transform:rotate(360deg)}}
-
 .app{width:100%;max-width:520px;margin:0 auto;padding:12px;position:relative;z-index:1}
-
 .header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--card);backdrop-filter:blur(40px);border-radius:var(--radius);border:1px solid var(--border);margin-bottom:12px}
 .header-left{display:flex;align-items:center;gap:10px}
 .logo{width:46px;height:46px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:24px;animation:logoGlow 3s ease-in-out infinite}
@@ -226,26 +214,22 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 .btn-icon{width:38px;height:38px;background:var(--card2);border:1px solid var(--border);border-radius:var(--radius-xs);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;color:var(--text2);transition:all 0.3s}
 .btn-icon:hover{border-color:var(--accent);color:var(--accent)}
 .btn-icon.active{background:var(--glass);border-color:var(--accent);color:var(--accent);box-shadow:0 0 20px rgba(0,255,204,0.3)}
-
 .visualizer-3d{position:relative;width:100%;aspect-ratio:1;max-height:350px;background:var(--card);backdrop-filter:blur(40px);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;margin-bottom:10px}
 .visualizer-3d canvas{width:100%;height:100%}
 .viz-overlay{position:absolute;bottom:0;left:0;right:0;padding:16px;background:linear-gradient(to top,rgba(5,5,16,0.9),transparent)}
 .track-title{font-family:'Orbitron',sans-serif;font-size:16px;font-weight:700;color:var(--accent);margin-bottom:2px;text-shadow:0 0 20px rgba(0,255,204,0.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .track-artist{font-size:11px;color:var(--text2)}
 .track-time{display:flex;justify-content:space-between;font-family:'Orbitron',sans-serif;font-size:10px;color:var(--accent2);margin-top:6px}
-
 .message-box{background:var(--card);backdrop-filter:blur(40px);border-radius:var(--radius);border:1px solid var(--border);padding:12px;margin-bottom:10px}
 .message-box textarea{width:100%;background:var(--card2);border:1px solid var(--border);border-radius:var(--radius-xs);padding:10px;color:var(--text);font-family:'Cairo',sans-serif;font-size:13px;resize:vertical;min-height:70px;outline:none;transition:border 0.3s}
 .message-box textarea:focus{border-color:var(--accent)}
 .msg-meta{display:flex;justify-content:space-between;margin-top:6px;font-size:10px;color:var(--text3)}
 .msg-meta span:first-child{color:var(--accent)}
-
 .timer-box{background:var(--card);backdrop-filter:blur(40px);border-radius:var(--radius);border:1px solid var(--border);padding:12px 16px;margin-bottom:10px;display:flex;flex-direction:column;gap:8px}
 .timer-box label{font-size:11px;color:var(--text2);font-weight:600}
 .timer-labels{display:flex;justify-content:space-between;align-items:center;font-size:9px}
 .timer-labels #intervalValue{color:var(--accent);font-family:'Orbitron',sans-serif;font-weight:700;font-size:11px}
 .timer-labels #intervalHint{color:var(--text3)}
-
 .controls{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:12px}
 .ctrl-btn{width:42px;height:42px;background:var(--card2);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;color:var(--text2);transition:all 0.3s}
 .ctrl-btn:hover{border-color:var(--accent);color:var(--accent)}
@@ -255,7 +239,6 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 .ctrl-play:active{transform:scale(0.95)}
 .ctrl-play.running{background:linear-gradient(135deg,#ff4466,#ff44aa);animation:pulseBtn 1.5s ease-in-out infinite}
 @keyframes pulseBtn{0%,100%{box-shadow:0 0 20px rgba(255,68,102,0.5)}50%{box-shadow:0 0 45px rgba(255,68,170,0.9)}}
-
 .filter-panel,.settings-panel{background:var(--card);backdrop-filter:blur(40px);border-radius:var(--radius);border:1px solid var(--border);padding:16px;margin-bottom:12px;animation:slideDown 0.4s ease}
 @keyframes slideDown{from{opacity:0;max-height:0}to{opacity:1;max-height:800px}}
 .filter-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
@@ -268,23 +251,19 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 .filter-knob span{font-size:9px;color:var(--text2)}
 .search-input{width:100%;padding:8px 12px;background:var(--card2);border:1px solid var(--border);border-radius:var(--radius-xs);color:var(--text);font-family:'Cairo',sans-serif;font-size:12px;outline:none}
 .search-input:focus{border-color:var(--accent)}
-
 .gold-slider{width:100%;height:4px;-webkit-appearance:none;appearance:none;background:rgba(0,255,204,0.15);border-radius:2px;outline:none;cursor:pointer}
 .gold-slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;background:var(--accent);border-radius:50%;cursor:pointer;box-shadow:0 0 15px rgba(0,255,204,0.6);border:2px solid #000}
-
 .setting-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
 .setting-row span{font-size:11px;color:var(--text2)}
 .setting-row input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent);cursor:pointer}
 .text-input{padding:6px 10px;background:var(--card2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Cairo',sans-serif;font-size:11px;outline:none;width:130px}
 .text-input:focus{border-color:var(--accent)}
-
 .history-panel{background:var(--card);backdrop-filter:blur(40px);border-radius:var(--radius);border:1px solid var(--border);padding:16px;margin-bottom:12px;max-height:220px;overflow-y:auto;animation:slideDown 0.4s ease}
 .history-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .history-header h3{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;color:var(--accent2)}
 .history-line{padding:6px 0;font-size:12px;color:var(--text2);text-align:center;transition:all 0.3s;border-bottom:1px solid rgba(255,255,255,0.03)}
 .history-line.active{color:var(--accent);font-size:14px;font-weight:700;text-shadow:0 0 15px rgba(0,255,204,0.4)}
 .history-line.fail{color:#ff4466}
-
 .playlist-section{margin-top:8px;padding-bottom:30px}
 .playlist-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .playlist-header h3{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;color:var(--text)}
@@ -308,13 +287,11 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 .contact-item .c-status.failed{color:#ff4466;border:1px solid #ff4466}
 .empty-playlist{text-align:center;padding:30px;color:var(--text3)}
 .empty-playlist span{font-size:40px;display:block;margin-bottom:8px}
-
 .toast{position:fixed;bottom:35px;left:50%;transform:translateX(-50%) translateY(130px);background:var(--card);border:1px solid var(--accent);color:var(--text);padding:10px 22px;border-radius:25px;font-size:11px;z-index:300;transition:transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275);font-family:'Cairo',sans-serif;max-width:90%}
 .toast.show{transform:translateX(-50%) translateY(0)}
 .toast.error{border-color:#ff4466;color:#ff4466}
 .particle{position:fixed;border-radius:50%;pointer-events:none;z-index:0}
 @keyframes particleFloat{0%{transform:translateY(110vh) scale(0);opacity:0}15%{opacity:0.7}85%{opacity:0.1}100%{transform:translateY(-10vh) scale(1.5);opacity:0}}
-
 @media(max-width:400px){.controls{gap:10px}.filter-options{gap:10px}}"""
 
 # ═══════════════════════════════════════════════════════════
@@ -322,32 +299,19 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 # ═══════════════════════════════════════════════════════════
 
 def build_config_js():
-    return """// ═══════════════════════════════════════════════════════════
-// ⚙ SMS BLASTER 2044 - Configuration
-// ═══════════════════════════════════════════════════════════
-// ضع مفاتيح Twilio هنا لتفعيل الإرسال الحقيقي.
-// اتركها فارغة ليعمل التطبيق في وضع المحاكاة.
-// ⚠ تحذير: نشر هذه المفاتيح على GitHub Pages عام = خطر أمني.
-//    يفضل استخدام Backend وسيط (Cloudflare Worker / Vercel).
-// ═══════════════════════════════════════════════════════════
-
+    return """// SMS BLASTER 2044 - Configuration
 const CONFIG = {
-    // ─ Twilio ─
     twilio: {
-        accountSid: '',           // ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        authToken: '',            // your_auth_token
-        fromNumber: '',           // +1234567890
+        accountSid: '',
+        authToken: '',
+        fromNumber: '',
         endpoint: 'https://api.twilio.com/2010-04-01/Accounts'
     },
-
-    // ─ Backend وسيط (موصى به) ─
     backend: {
         enabled: false,
         url: 'https://your-worker.workers.dev/send',
         apiKey: ''
     },
-
-    // ─ عام ─
     defaults: {
         intervalSeconds: 30,
         contactsFile: 'contacts.txt',
@@ -356,8 +320,6 @@ const CONFIG = {
         soundAlert: true,
         skipFailed: false
     },
-
-    // ─ حدود ─
     limits: {
         minInterval: 5,
         maxInterval: 300,
@@ -381,20 +343,15 @@ def build_storage_js():
     return """const KEYS={contacts:'smsblaster2044_contacts',settings:'smsblaster2044_settings',history:'smsblaster2044_history',filters:'smsblaster2044_filters',queue:'smsblaster2044_queue'};
 function saveData(k,v){try{localStorage.setItem(k,JSON.stringify(v));return 1}catch(e){return 0}}
 function loadData(k,d=null){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
-
 function saveContacts(list){const data=list.map(c=>({id:c.id,name:c.name,number:c.number,status:c.status,sentAt:c.sentAt||null,failReason:c.failReason||null}));return saveData(KEYS.contacts,data)}
 function loadContacts(){return loadData(KEYS.contacts,[])}
-
 function saveQueue(q){saveData(KEYS.queue,q)}
 function loadQueue(){return loadData(KEYS.queue,{currentIndex:0,running:false})}
-
 function saveFilters(f){saveData(KEYS.filters,f)}
 function loadFilters(){return loadData(KEYS.filters,{type:'all',search:''})}
-
 function saveHistory(h){saveData(KEYS.history,h)}
 function loadHistory(){return loadData(KEYS.history,[])}
 function addToHistory(entry){const h=loadHistory();h.unshift(entry);if(h.length>CONFIG.limits.maxHistoryEntries)h.pop();saveHistory(h)}
-
 function saveSettings(s){saveData(KEYS.settings,s)}
 function loadSettings(){return loadData(KEYS.settings,{...CONFIG.defaults})}"""
 
@@ -423,13 +380,11 @@ function updateVizData(contacts){if(!contacts||!contacts.length)return;contactDa
 function pulseViz(){vizPulse+=1.5}"""
 
 # ═══════════════════════════════════════════════════════════
-# 📱 7. sender.js  ← الملف الأساسي
+# 📱 7. sender.js
 # ═══════════════════════════════════════════════════════════
 
 def build_sender_js():
     return """let contacts=[],settings=loadSettings(),currentIndex=0,isRunning=false,nextTimer=null,countdownTimer=null,countdown=0;
-
-// ═══════ التهيئة ═══════
 function initSender(){
     contacts=loadContacts();
     if(contacts.length)currentIndex=contacts.findIndex(c=>c.status==='pending');
@@ -438,8 +393,6 @@ function initSender(){
     updateVizData(contacts);
     updateProgressUI();
 }
-
-// ═══════ قراءة ملف contacts.txt ═══════
 async function loadContactsFromFile(){
     try{
         const res=await fetch(CONFIG.defaults.contactsFile+'?t='+Date.now());
@@ -453,7 +406,7 @@ async function loadContactsFromFile(){
         renderContacts();
         updateVizData(contacts);
         updateProgressUI();
-        showToast(`✅ تم تحميل ${parsed.length} جهة اتصال`);
+        showToast('✅ تم تحميل '+parsed.length+' جهة اتصال');
         addToHistory({time:new Date().toISOString(),type:'load',count:parsed.length});
         renderHistory();
     }catch(e){
@@ -461,7 +414,6 @@ async function loadContactsFromFile(){
         console.error(e);
     }
 }
-
 function parseContactsText(text){
     const lines=text.split(/\\r?\\n/).map(l=>l.trim()).filter(l=>l&&!l.startsWith('#'));
     const out=[];
@@ -470,26 +422,16 @@ function parseContactsText(text){
         const number=parts[0];
         const name=parts[1]||('جهة '+(i+1));
         if(!number)return;
-        out.push({
-            id:'c_'+Date.now()+'_'+i,
-            name:name,
-            number:number,
-            status:'pending',
-            sentAt:null,
-            failReason:null
-        });
+        out.push({id:'c_'+Date.now()+'_'+i,name:name,number:number,status:'pending',sentAt:null,failReason:null});
     });
     return out;
 }
-
-// ═══════ التشغيل/الإيقاف ═══════
 function toggleAutoSend(){
     if(!contacts.length){showToast('⚠ حمّل جهات الاتصال أولاً',true);return}
     if(!document.getElementById('messageBody').value.trim()){showToast('⚠ اكتب نص الرسالة أولاً',true);return}
     if(isRunning)stopAutoSend();
     else startAutoSend();
 }
-
 function startAutoSend(){
     isRunning=true;
     const btn=document.getElementById('sendBtn');
@@ -499,7 +441,6 @@ function startAutoSend(){
     showToast('▶ بدأ الإرسال التسلسلي');
     scheduleNext(0);
 }
-
 function stopAutoSend(){
     isRunning=false;
     clearTimeout(nextTimer);
@@ -511,7 +452,6 @@ function stopAutoSend(){
     document.getElementById('nextIn').textContent='التالي: --';
     showToast('⏸ تم الإيقاف');
 }
-
 function scheduleNext(delayMs){
     clearTimeout(nextTimer);
     clearInterval(countdownTimer);
@@ -525,11 +465,8 @@ function scheduleNext(delayMs){
     }
     nextTimer=setTimeout(()=>{sendNextInQueue()},delayMs);
 }
-
-// ═══════ الإرسال الفعلي ═══════
 async function sendNextInQueue(){
     if(!isRunning)return;
-    // تجاهل المرسل
     while(currentIndex<contacts.length && contacts[currentIndex].status==='sent'){
         currentIndex++;
     }
@@ -540,20 +477,16 @@ async function sendNextInQueue(){
         renderHistory();
         return;
     }
-
     const contact=contacts[currentIndex];
     document.getElementById('currentContact').textContent=contact.name+' • '+contact.number;
     document.getElementById('sendStatus').textContent='⏳ جاري الإرسال...';
-
     const message=document.getElementById('messageBody').value.trim();
     let result;
-
     if(isLiveMode()){
         result=await sendViaAPI(contact,message);
     }else{
         result=await simulateSend(contact,message);
     }
-
     if(result.ok){
         contact.status='sent';
         contact.sentAt=new Date().toISOString();
@@ -578,27 +511,21 @@ async function sendNextInQueue(){
             return;
         }
     }
-
     saveContacts(contacts);
     renderContacts();
     updateVizData(contacts);
     updateProgressUI();
     renderHistory();
-
     currentIndex++;
     saveQueue({currentIndex,running:true});
-
     if(isRunning)scheduleNext(settings.intervalSeconds*1000);
 }
-
 async function sendNextNow(){
     if(!isRunning){toggleAutoSend();return}
     clearTimeout(nextTimer);
     clearInterval(countdownTimer);
     await sendNextInQueue();
 }
-
-// ═══════ API حقيقي (Twilio / Backend) ═══════
 async function sendViaAPI(contact,message){
     try{
         if(CONFIG.backend.enabled){
@@ -610,23 +537,23 @@ async function sendViaAPI(contact,message){
             if(!res.ok)throw new Error('HTTP '+res.status);
             return {ok:true};
         }
-        // Twilio مباشر (غير موصى به من الواجهة)
-        const {accountSid,authToken,fromNumber,endpoint}=CONFIG.twilio;
-        const url=`${endpoint}/${accountSid}/Messages.json`;
+        const accountSid=CONFIG.twilio.accountSid;
+        const authToken=CONFIG.twilio.authToken;
+        const fromNumber=CONFIG.twilio.fromNumber;
+        const endpoint=CONFIG.twilio.endpoint;
+        const url=endpoint+'/'+accountSid+'/Messages.json';
         const body=new URLSearchParams({To:contact.number,From:fromNumber,Body:message});
         const res=await fetch(url,{
             method:'POST',
             headers:{'Authorization':'Basic '+btoa(accountSid+':'+authToken),'Content-Type':'application/x-www-form-urlencoded'},
             body:body.toString()
         });
-        if(!res.ok){const t=await res.text();throw new Error('Twilio '+res.status)}
+        if(!res.ok)throw new Error('Twilio '+res.status);
         return {ok:true};
     }catch(e){
         return {ok:false,error:e.message};
     }
 }
-
-// ═══════ محاكاة ═══════
 function simulateSend(contact,message){
     return new Promise(resolve=>{
         setTimeout(()=>{
@@ -635,8 +562,6 @@ function simulateSend(contact,message){
         },600+Math.random()*400);
     });
 }
-
-// ═══════ واجهة ═══════
 function renderContacts(){
     const c=document.getElementById('contactsList');
     if(!contacts.length){
@@ -655,40 +580,36 @@ function renderContacts(){
         const isCurrent=idx===currentIndex&&isRunning;
         const cls=['contact-item',ct.status==='sent'?'sent':'',ct.status==='failed'?'failed':'',isCurrent?'active':''].filter(Boolean).join(' ');
         const statusLabel=ct.status==='sent'?'✓ مرسل':ct.status==='failed'?'✗ فشل':'⏳ متبقي';
-        return `<div class="${cls}" onclick="focusContact(${idx})">
-            <div class="c-icon">${ct.status==='sent'?'✅':ct.status==='failed'?'❌':'👤'}</div>
-            <div class="c-info">
-                <div class="c-name">${escapeHtml(ct.name)}</div>
-                <div class="c-number">${escapeHtml(ct.number)}</div>
-            </div>
-            <span class="c-status ${ct.status}">${statusLabel}</span>
-        </div>`;
+        return '<div class="'+cls+'" onclick="focusContact('+idx+')">'+
+            '<div class="c-icon">'+(ct.status==='sent'?'✅':ct.status==='failed'?'❌':'👤')+'</div>'+
+            '<div class="c-info">'+
+                '<div class="c-name">'+escapeHtml(ct.name)+'</div>'+
+                '<div class="c-number">'+escapeHtml(ct.number)+'</div>'+
+            '</div>'+
+            '<span class="c-status '+ct.status+'">'+statusLabel+'</span>'+
+        '</div>';
     }).join('');
 }
-
 function focusContact(idx){
     const ct=contacts[idx];
     if(!ct)return;
     document.getElementById('currentContact').textContent=ct.name+' • '+ct.number;
     showToast('📌 '+ct.name);
 }
-
 function updateProgressUI(){
     const total=contacts.length;
     const sent=contacts.filter(c=>c.status==='sent').length;
     const failed=contacts.filter(c=>c.status==='failed').length;
     const pending=total-sent-failed;
-    document.getElementById('progressText').textContent=`${sent+failed} / ${total}`;
-    document.getElementById('currentContact').textContent=total?`${pending} متبقي • ${sent} مرسل`:'لا يوجد';
+    document.getElementById('progressText').textContent=(sent+failed)+' / '+total;
+    document.getElementById('currentContact').textContent=total?(pending+' متبقي • '+sent+' مرسل'):'لا يوجد';
 }
-
 function updateInterval(){
     const v=parseInt(document.getElementById('intervalSlider').value);
     settings.intervalSeconds=v;
     document.getElementById('intervalValue').textContent=v+' ثانية';
     saveSettings(settings);
 }
-
 function resetQueue(){
     if(!confirm('إعادة تعيين كل حالات الإرسال؟'))return;
     contacts.forEach(c=>{c.status='pending';c.sentAt=null;c.failReason=null});
@@ -701,7 +622,6 @@ function resetQueue(){
     updateProgressUI();
     showToast('🔄 تم إعادة التعيين');
 }
-
 function exportData(){
     const data={exportedAt:new Date().toISOString(),message:document.getElementById('messageBody').value,interval:settings.intervalSeconds,contacts:contacts,history:loadHistory()};
     const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
@@ -710,12 +630,8 @@ function exportData(){
     URL.revokeObjectURL(url);
     showToast('📥 تم التصدير');
 }
-
-// ═══════ مساعدات ═══════
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function playBeep(freq){try{const ctx=new (window.AudioContext||window.webkitAudioContext)();const o=ctx.createOscillator();const g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=freq;o.type='sine';g.gain.setValueAtTime(0.08,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.15);o.start();o.stop(ctx.currentTime+0.15)}catch(e){}}
-
-// ═══════ ربط الأزرار من HTML ═══════
 function loadContacts(){loadContactsFromFile()}"""
 
 # ═══════════════════════════════════════════════════════════
@@ -755,19 +671,17 @@ function renderHistory(){
     if(!h.length){c.innerHTML='<p class="history-line">📱 لا يوجد سجل بعد</p><p class="history-line">✨ ابدأ الإرسال لعرض السجل</p>';return}
     c.innerHTML=h.map((e,i)=>{
         const t=new Date(e.time).toLocaleTimeString('ar');
-        if(e.type==='load')return `<p class="history-line ${i===0?'active':''}">📁 ${t} — تم تحميل ${e.count} جهة</p>`;
-        if(e.type==='complete')return `<p class="history-line ${i===0?'active':''}">🎉 ${t} — اكتمل الإرسال (${e.count})</p>`;
+        if(e.type==='load')return '<p class="history-line '+(i===0?'active':'')+'">📁 '+t+' — تم تحميل '+e.count+' جهة</p>';
+        if(e.type==='complete')return '<p class="history-line '+(i===0?'active':'')+'">🎉 '+t+' — اكتمل الإرسال ('+e.count+')</p>';
         const cls=e.ok?'':'fail';
-        return `<p class="history-line ${cls} ${i===0?'active':''}">${e.ok?'✅':'❌'} ${t} — ${escapeHtml(e.name)} (${escapeHtml(e.number)})${e.error?' — '+escapeHtml(e.error):''}</p>`;
+        return '<p class="history-line '+cls+' '+(i===0?'active':'')+'">'+(e.ok?'✅':'❌')+' '+t+' — '+escapeHtml(e.name)+' ('+escapeHtml(e.number)+')'+(e.error?' — '+escapeHtml(e.error):'')+'</p>';
     }).join('');
 }
 function clearHistory(){if(confirm('مسح السجل؟')){saveHistory([]);renderHistory();showToast('🗑 تم مسح السجل')}}
-
 function toggleSettings(){
     const p=document.getElementById('settingsPanel');
     p.style.display=p.style.display==='none'?'block':'none';
     document.getElementById('btnSettings').classList.toggle('active',p.style.display==='block');
-    // تحميل القيم
     document.getElementById('skipFailed').checked=settings.skipFailed;
     document.getElementById('soundAlert').checked=settings.soundAlert;
     document.getElementById('simulateMode').checked=settings.simulate;
@@ -788,8 +702,7 @@ function saveSettingsToStorage(){saveData(KEYS.settings,settings)}"""
 # ═══════════════════════════════════════════════════════════
 
 def build_app_js():
-    return """// ═══════ SMS BLASTER 2044 - Bootstrap ═══════
-function showToast(msg,isError){
+    return """function showToast(msg,isError){
     const t=document.getElementById('toast');
     t.textContent=msg;
     t.classList.toggle('error',!!isError);
@@ -797,8 +710,6 @@ function showToast(msg,isError){
     clearTimeout(t._timer);
     t._timer=setTimeout(()=>t.classList.remove('show'),2600);
 }
-
-// عدّاد الأحرف
 function initMessageCounter(){
     const ta=document.getElementById('messageBody');
     const cc=document.getElementById('charCount');
@@ -810,23 +721,17 @@ function initMessageCounter(){
         pc.textContent=parts+' رسالة';
     });
 }
-
-// ═══════ التشغيل ═══════
 (function boot(){
     initParticles();
     initVisualizer();
     initSender();
     initFilters();
     initMessageCounter();
-
-    // استرجاع الفاصل من التخزين
     const savedSettings=loadSettings();
     if(savedSettings.intervalSeconds){
         document.getElementById('intervalSlider').value=savedSettings.intervalSeconds;
         document.getElementById('intervalValue').textContent=savedSettings.intervalSeconds+' ثانية';
     }
-
-    // استرجاع نص الرسالة
     const savedMsg=loadData('smsblaster2044_msg','');
     if(savedMsg){
         document.getElementById('messageBody').value=savedMsg;
@@ -835,8 +740,6 @@ function initMessageCounter(){
     document.getElementById('messageBody').addEventListener('input',e=>{
         saveData('smsblaster2044_msg',e.target.value);
     });
-
-    // مؤشر الوضع
     if(!isLiveMode()){
         setTimeout(()=>showToast('🧪 وضع المحاكاة (بدون إرسال حقيقي)'),600);
     }else{
@@ -846,16 +749,13 @@ function initMessageCounter(){
 })();"""
 
 # ═══════════════════════════════════════════════════════════
-# 📱 11. contacts.txt (نموذج)
+# 📱 11. contacts.txt
 # ═══════════════════════════════════════════════════════════
 
 def build_contacts_txt():
-    return """# ═══════════════════════════════════════════════════════
-# ملف جهات الاتصال - SMS BLASTER 2044
-# ═══════════════════════════════════════════════════════
+    return """# ملف جهات الاتصال - SMS BLASTER 2044
 # الصيغة: رقم,اسم (الاسم اختياري)
 # الأسطر التي تبدأ بـ # يتم تجاهلها
-# ═══════════════════════════════════════════════════════
 
 +966501234567,أحمد محمد
 +966502345678,سارة علي
@@ -874,43 +774,85 @@ def build_contacts_txt():
 # ═══════════════════════════════════════════════════════════
 
 def build_readme():
-    return """# 📱 SMS BLASTER 2044
+    return """# SMS BLASTER 2044
 
-تطبيق ويب لإرسال رسائل SMS جماعية بشكل **تسلسلي تلقائي** مع تحكم كامل بالمدة الزمنية.
+تطبيق ويب لإرسال رسائل SMS جماعية بشكل تسلسلي تلقائي.
 
-## ✨ المميزات
-- 📁 قراءة جهات الاتصال من ملف `contacts.txt`
-- ⏱ تحديد الفاصل الزمني بين الرسائل (5-300 ثانية)
-- 🔄 إرسال تلقائي متسلسل مع إمكانية الإيقاف/الاستئناف
-- ⏭ إرسال الرقم التالي فوراً بزر
-- 📊 متتبع تقدم (مرسل/متبقي/فشل)
-- 📜 سجل كامل للرسائل
-- 🎨 تصميم Glass Morphism مستقبلي
-- 💾 حفظ تلقائي للحالة (يستأنف من حيث توقف)
-- 📥 تصدير تقرير JSON
+## المميزات
+- قراءة جهات الاتصال من ملف contacts.txt
+- تحديد الفاصل الزمني بين الرسائل (5-300 ثانية)
+- إرسال تلقائي متسلسل مع إمكانية الإيقاف والاستئناف
+- إرسال الرقم التالي فوراً بزر
+- متتبع تقدم (مرسل/متبقي/فشل)
+- سجل كامل للرسائل
+- تصميم Glass Morphism
+- حفظ تلقائي للحالة
+- تصدير تقرير JSON
 
-## 🚀 الاستخدام
-1. عدّل `contacts.txt` وأضف أرقامك (صيغة: `+966...,اسم`)
+## الاستخدام
+1. عدّل contacts.txt وأضف أرقامك
 2. ارفع الملفات إلى GitHub
 3. افتح التطبيق
 4. اكتب نص الرسالة
 5. اضبط الفاصل الزمني
-6. اضغط زر التشغيل ▶
+6. اضغط زر التشغيل
 
-## ⚙ الوضعان
+## الأوضاع
+- محاكاة (افتراضي): لا يرسل رسائل حقيقية
+- مباشر: يتطلب Twilio أو Backend وسيط
 
-### 🧪 محاكاة (افتراضي)
-- لا يرسل رسائل حقيقية
-- للتجربة والعرض فقط
-- مفعّل افتراضياً
+## تحذير أمني
+لا تنشر مفاتيح API في الكود إذا كان المستودع عاماً.
+"""
 
-### 🔴 مباشر (حقيقي)
-يتطلب أحد الخيارات:
+# ═══════════════════════════════════════════════════════════
+# MAIN
+# ═══════════════════════════════════════════════════════════
 
-**الخيار 1: Twilio مباشر (غير آمن على الواجهة)**
-عدّل `config.js`:
-```js
-CONFIG.defaults.simulate = false;
-CONFIG.twilio.accountSid = 'ACxxx';
-CONFIG.twilio.authToken  = 'xxx';
-CONFIG.twilio.fromNumber = '+1234567890';
+def main():
+    print("""
+╔══════════════════════════════════════════════════════════╗
+║  📱  SMS BLASTER 2044 - ULTIMATE CONTACT SENDER  📱    ║
+║     Ultimate Generator - 12 Files                        ║
+╚══════════════════════════════════════════════════════════╝
+    """)
+
+    section("BUILDING SMS BLASTER 2044")
+
+    write("index.html", build_index())
+    write("style.css", build_style())
+    write("config.js", build_config_js())
+    write("storage.js", build_storage_js())
+    write("particles.js", build_particles_js())
+    write("visualizer.js", build_visualizer_js())
+    write("sender.js", build_sender_js())
+    write("filters.js", build_filters_js())
+    write("history.js", build_history_js())
+    write("app.js", build_app_js())
+    write("contacts.txt", build_contacts_txt())
+    write("README.md", build_readme())
+
+    print(f"""
+{'='*60}
+  ✅ BUILD COMPLETE! - {TOTAL_LINES} خط
+  📁 12 ملف
+
+  📁 قراءة contacts.txt تلقائياً
+  ⏱ فاصل زمني قابل للضبط
+  🔄 إرسال تسلسلي أوتوماتيكي
+  📊 متتبع تقدم لحظي
+  📜 سجل كامل + تصدير
+  🧪 وضع محاكاة افتراضي
+
+  🚀 للتشغيل:
+     1. عدّل contacts.txt بأرقامك
+     2. ارفع الملفات على GitHub
+     3. افتح index.html
+     4. اكتب الرسالة واضغط ▶
+
+  📱 SMS BLASTER 2044 READY!
+{'='*60}
+    """)
+
+if __name__ == "__main__":
+    main()
